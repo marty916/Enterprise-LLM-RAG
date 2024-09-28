@@ -21,7 +21,7 @@ Welcome to Lesson 01 of the **Enterprise-LLM-RAG** course! In this lesson, we'll
 ### **1. Clone the Repository**
 
 ```bash
-git clone https://github.com/your-username/Enterprise-LLM-RAG.git
-cd Enterprise-LLM-RAG/lessons/01-introduction
+git clone https://github.com/marty916/Enterprise-LLM-RAG.git
+cd Enterprise-LLM-RAG/lessons/01-chatbot
 
 
