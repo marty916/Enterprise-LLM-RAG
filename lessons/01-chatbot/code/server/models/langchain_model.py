@@ -1,3 +1,4 @@
+# server/models/langchain_model.py
 # Import all necessary components from index.py
 from models.index import ChatOpenAI, ChatPromptTemplate, StrOutputParser
 

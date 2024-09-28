@@ -1,3 +1,4 @@
+# server/main.py
 from fastapi import FastAPI
 from pydantic import BaseModel
 from api.chatbot import get_chatbot_response

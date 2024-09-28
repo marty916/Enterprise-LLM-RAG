@@ -1,3 +1,4 @@
+// src/components/Chatbot.jsx
 import React, { useState } from 'react';
 import { sendMessage } from '../services/api';
 
