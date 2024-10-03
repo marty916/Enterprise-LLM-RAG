@@ -62,6 +62,12 @@ Refer to the following code snippets to set up a specialized customer support ch
    - Develop a new React component for the customer support chatbot interface.
    - Integrate the new component into the main application.
 
+```bash
+RUN CODE:
+VS Code create a spilt terminal
+Terminal left client: \Enterprise-LLM-RAG\lessons\02-usecases\code\client>npm start
+Terminal right server: (venv)\Enterprise=LLM-RAG\lessons\02-usecases\code\server>uvicorn main:app --reload 
+```
 ## **Next Steps**
 
 Proceed to [Lesson 03: Data Ingestion](../03-data-ingestion/README.md) to learn how to ingest and process data for your chatbots.

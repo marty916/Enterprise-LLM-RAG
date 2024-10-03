@@ -23,5 +23,12 @@ Welcome to Lesson 01 of the **Enterprise-LLM-RAG** course! In this lesson, we'll
 ```bash
 git clone https://github.com/marty916/Enterprise-LLM-RAG.git
 cd Enterprise-LLM-RAG/lessons/01-chatbot
+```
 
+```bash
+RUN CODE:
+VS Code create a spilt terminal
+Terminal left client: \Enterprise-LLM-RAG\lessons\01-chatbot\code\client>npm start
+Terminal right server: (venv)\Enterprise=LLM-RAG\lessons\01-chatbot\code\server>uvicorn main:app --reload 
+```            
 

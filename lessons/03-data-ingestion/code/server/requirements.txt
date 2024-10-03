@@ -1,0 +1,19 @@
+# requirements.txt
+fastapi
+uvicorn
+openai
+langchain
+langchain_community
+langchain-chroma
+langchain-openai
+pydantic
+python-dotenv
+wikipedia
+numpy
+pandas
+matplotlib
+seaborn
+scikit-learn
+umap-learn
+
+
