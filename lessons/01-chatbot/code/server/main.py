@@ -1,30 +1,19 @@
 # server/main.py
 from fastapi import FastAPI
-from pydantic import BaseModel
-from api.chatbot import get_chatbot_response
+from api.chatbot import router as chatbot_router
+from core.config import settings
 from fastapi.middleware.cors import CORSMiddleware
-
-import os
-from dotenv import load_dotenv
-
-# Load environment variables from .env file
-load_dotenv()
 
 app = FastAPI()
 
-# Allow CORS from client
+# Configure CORS middleware
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://localhost:3000"],
+    allow_origins=settings.ALLOWED_ORIGINS,
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
 )
 
-class ChatRequest(BaseModel):
-    message: str
-
-@app.post("/chat")
-async def chat(request: ChatRequest):
-    response = get_chatbot_response(request.message)
-    return {"reply": response}
+# Include the chatbot API router
+app.include_router(chatbot_router)

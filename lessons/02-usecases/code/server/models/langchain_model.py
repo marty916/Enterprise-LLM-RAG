@@ -1,55 +1,63 @@
 # server/models/langchain_model.py
-# Import all necessary components from index.py
+from abc import ABC, abstractmethod
 from models.index import ChatOpenAI, ChatPromptTemplate, StrOutputParser
 
-def setup_chatbot():
-    # Setup OpenAI API (You need to have OPENAI_API_KEY in the environment)
+class IChatbotModel(ABC):
     """
-    Setup a chatbot using the OpenAI API.
-
-    The chatbot is created using a simple system prompt and the OpenAI
-    `ChatOpenAI` model.
-
-    The chatbot is then returned as a LangChain `chain` object
-
-    :return: A LangChain `chain` object that acts as a chatbot
+    Interface for chatbot models.
     """
-    model = ChatOpenAI(temperature=0.7)
-    
-    # Create a conversation chain with a simple system prompt
-    system_template = """
-    You are a helpful assistant. Answer the following question.
-    
-    Question:
+    @abstractmethod
+    def invoke(self, message: str) -> str:
+        pass
+
+class GeneralChatbotModel(IChatbotModel):
     """
-    ## prompt_template = ChatPromptTemplate(input_variables=["message"], template=template)
-    prompt_template = ChatPromptTemplate.from_messages(
-        [("system", system_template), ("user", "{message}") ]
+    Concrete implementation of IChatbotModel for general chat.
+    """
+    def __init__(self, temperature: float = 0.7):
+        self.model = ChatOpenAI(temperature=temperature)
+        system_template = """
+        You are a helpful assistant. Answer the following question.
+        
+        Question:
+        """
+        self.prompt_template = ChatPromptTemplate.from_messages(
+            [("system", system_template), ("user", "{message}")]
         )
+        self.parser = StrOutputParser()
+        # Create a processing chain: prompt -> model -> parser
+        self.chatbot = self.prompt_template | self.model | self.parser
 
-    # JSON response gets returned so we want to turn it into a string
-    chatbot = prompt_template | model | StrOutputParser()
-    
-    return chatbot
+    def invoke(self, message: str) -> str:
+        """
+        Invokes the general chatbot with the given message.
 
+        :param message: User message to the chatbot.
+        :return: Chatbot's response as a string.
+        """
+        return self.chatbot.invoke({"message": message})
 
-def setup_customer_support_chatbot():
+class CustomerSupportChatbotModel(IChatbotModel):
     """
-    Setup a customer support chatbot using the OpenAI API.
+    Concrete implementation of IChatbotModel for customer support.
     """
-    model = ChatOpenAI(temperature=0.5)
+    def __init__(self, temperature: float = 0.5):
+        self.model = ChatOpenAI(temperature=temperature)
+        system_template = """
+        You are a customer support assistant. Help customers with their inquiries about our products and services.
+        """
+        self.prompt_template = ChatPromptTemplate.from_messages(
+            [("system", system_template), ("user", "{message}")]
+        )
+        self.parser = StrOutputParser()
+        # Create a processing chain: prompt -> model -> parser
+        self.chatbot = self.prompt_template | self.model | self.parser
 
-    system_prompt = """
-    You are a customer support assistant. Help customers with their inquiries about our products and services.
-    """
+    def invoke(self, message: str) -> str:
+        """
+        Invokes the customer support chatbot with the given message.
 
-    user_prompt = "{message}"
-
-    prompt_template = ChatPromptTemplate.from_messages(
-        [("system", system_prompt), ("user", user_prompt)]
-    )
-
-    chatbot = prompt_template | model | StrOutputParser()
-
-    return chatbot
-
+        :param message: User message to the chatbot.
+        :return: Chatbot's response as a string.
+        """
+        return self.chatbot.invoke({"message": message})
