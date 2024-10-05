@@ -21,12 +21,22 @@ export const sendCustomerSupportMessage = async (message) => {
   }
 };
 
-export const sendChatWithDataMessage = async (message) => {
+// src/services/api.js
+export const sendChatWithDataMessage = async () => {
   try {
-    const response = await axios.post('http://localhost:8000/chat-with-data', { message });
-    return response.data.reply;
+      const response = await fetch('http://localhost:8000/chat-with-data', {
+          method: 'POST',
+          headers: {
+              'Content-Type': 'application/json',
+          },
+      });
+      if (!response.ok) {
+          throw new Error('Network response was not ok');
+      }
+      const data = await response.json();
+      return data;
   } catch (error) {
-    console.error('Error:', error);
-    return 'Error occurred while chatting.';
+      console.error('Error:', error);
+      return { embeddings: [], metadata: [] };
   }
 };

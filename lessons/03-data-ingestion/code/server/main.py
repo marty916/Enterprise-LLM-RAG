@@ -1,70 +1,23 @@
 # server/main.py
 from fastapi import FastAPI
-from pydantic import BaseModel
-from api.chatbot import get_chatbot_response
-from api.customersupport import get_customer_support_response
-from api.chat_with_data import get_chatwithdata_response
+from api.chatbot import router as chatbot_router
+from api.customersupport import router as customersupport_router
+from api.chatwithdata import router as chatwithdata_router
+from core.config import settings
 from fastapi.middleware.cors import CORSMiddleware
-
-import os
-from dotenv import load_dotenv
-
-# Load environment variables from .env file
-load_dotenv()
 
 app = FastAPI()
 
-# Allow CORS from client
+# Configure CORS middleware
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://localhost:3000"],
+    allow_origins=settings.ALLOWED_ORIGINS,
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
 )
 
-class ChatRequest(BaseModel):
-    message: str
-
-
-@app.post("/chat")
-async def chat(request: ChatRequest):
-    """
-    Handles incoming chat messages and generates a response using the chatbot.
-        
-    Parameters:
-    request (ChatRequest): The incoming chat message request containing the message to process.
-        
-    Returns:
-    dict: A dictionary containing the chatbot's response message.
-    """  
-    response = get_chatbot_response(request.message)
-    return {"reply": response}
-
-@app.post("/customer-support")
-async def customer_support_chat(request: ChatRequest):
-    """
-    Return a response from the customer support chatbot.
-
-    Args:
-        request: The input message to the chatbot.
-
-    Returns:
-        A dictionary containing the response from the chatbot.
-    """
-    response = get_customer_support_response(request.message)
-    return {"reply": response}
-
-@app.post("/chat-with-data")
-async def chat_with_data(request: ChatRequest):
-    """
-    Return a response from the customer support chatbot.
-
-    Args:
-        request: The input message to the chatbot.
-
-    Returns:
-        A dictionary containing the response from the chatbot.
-    """
-    response = get_chatwithdata_response(request.message)
-    return {"reply": response}
+# Include the chatbot API routers
+app.include_router(chatbot_router)
+app.include_router(customersupport_router)
+app.include_router(chatwithdata_router)
