@@ -1,0 +1,66 @@
+{
+  "$schema": "https://aka.ms/codetour-schema",
+  "title": "01-chatbot-tour",
+  "steps": [
+    {
+      "file": "lessons/01-chatbot/code/server/core/config.py",
+      "description": "# Configuration Settings",
+      "line": 15
+    },
+    {
+      "file": "lessons/01-chatbot/code/server/models/index.py",
+      "description": "# Centralize third-party imports",
+      "line": 16
+    },
+    {
+      "file": "lessons/01-chatbot/code/server/models/langchain_model.py",
+      "description": "# IChatbotModel interface",
+      "line": 16
+    },
+    {
+      "file": "lessons/01-chatbot/code/server/services/chatbot_service.py",
+      "description": "# ChatbotService\r\n1. Gets the response from the chatbot model",
+      "line": 11
+    },
+    {
+      "file": "lessons/01-chatbot/code/server/models/langchain_model.py",
+      "description": "# ChatbotModel Concrete Implementation\r\nInitializes:\r\n1. ChatOpenAI\r\n2. System message\r\n3. Output parser\r\n4. Creates the chain and stores it in `chatbot`\r\n5. Implements the invoke method and return the response",
+      "line": 25
+    },
+    {
+      "file": "lessons/01-chatbot/code/server/api/chatbot.py",
+      "description": "# /chat API Endpoint",
+      "line": 45
+    },
+    {
+      "file": "lessons/01-chatbot/code/server/main.py",
+      "description": "# Main\r\n1. Create FastAPI instance\r\n2. CORS middleware (if needed)\r\n3. Include chatbot router",
+      "line": 12
+    },
+    {
+      "file": "lessons/01-chatbot/code/client/src/services/api.js",
+      "description": "# api.js\r\n1. async sendMessage to send the user message to our /chat endpoint",
+      "line": 3
+    },
+    {
+      "file": "lessons/01-chatbot/code/client/src/components/Chatbot.jsx",
+      "description": "# Chatbot Reactjs component",
+      "line": 4
+    },
+    {
+      "file": "lessons/01-chatbot/code/client/src/App.css",
+      "description": "# App.css\r\n* simple styling for our component",
+      "line": 1
+    },
+    {
+      "file": "lessons/01-chatbot/code/client/src/App.js",
+      "description": "# App.js\r\n* App to hold our Chatbot component",
+      "line": 1
+    },
+    {
+      "file": "lessons/01-chatbot/code/client/src/index.js",
+      "description": "# index.js\r\n* boiler plate to initialize our ReactDOM and instantiate App",
+      "line": 2
+    }
+  ]
+}

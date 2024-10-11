@@ -1,4 +1,12 @@
-# server/services/chatbot_service.py
+"""
+/server/services/chatbot_service.py
+
+Gets a response from the chatbot model.
+
+:param message: User message to the chatbot.
+:return: Chatbot's response as a string.
+"""
+
 from models.langchain_model import IChatbotModel
 
 class ChatbotService:

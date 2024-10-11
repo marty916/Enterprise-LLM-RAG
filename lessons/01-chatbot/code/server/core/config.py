@@ -1,4 +1,12 @@
+"""
 # server/core/config.py
+Settings class to manage configuration parameters.
+    
+Attributes:
+    OPENAI_API_KEY (str): API key for OpenAI service.
+    ALLOWED_ORIGINS (list): List of allowed origins for requests.
+"""
+
 import os
 from dotenv import load_dotenv
 

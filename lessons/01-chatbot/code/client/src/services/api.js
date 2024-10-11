@@ -1,4 +1,4 @@
-// src/services/api.js
+// /client/src/services/api.js
 import axios from 'axios';
 
 export const sendMessage = async (message) => {

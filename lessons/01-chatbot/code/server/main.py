@@ -1,4 +1,15 @@
-# server/main.py
+"""
+/server/main.py
+Create a FastAPI instance and configure CORS middleware.
+
+Parameters:
+- app: FastAPI instance.
+
+Returns:
+- None
+"""
+
+
 from fastapi import FastAPI
 from api.chatbot import router as chatbot_router
 from core.config import settings
