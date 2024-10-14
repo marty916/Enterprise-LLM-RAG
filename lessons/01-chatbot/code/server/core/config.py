@@ -14,6 +14,7 @@ from dotenv import load_dotenv
 load_dotenv()
 
 class Settings:
+    # Any API Keys will be moved to API Gateway or Encryption
     OPENAI_API_KEY: str = os.getenv("OPENAI_API_KEY")
     ALLOWED_ORIGINS: list = ["http://localhost:3000"]
 

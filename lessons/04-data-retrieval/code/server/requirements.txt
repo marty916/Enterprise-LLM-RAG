@@ -1,4 +1,5 @@
 # server/requirements.txt
+docx2txt
 fastapi
 uvicorn
 openai

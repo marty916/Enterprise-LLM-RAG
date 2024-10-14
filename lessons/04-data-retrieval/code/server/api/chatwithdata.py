@@ -3,7 +3,7 @@ from fastapi import APIRouter, Depends
 from pydantic import BaseModel
 from services.chatwithdata_service import ChatWithDataService
 from models.langchain_model import ChatWithDataModel
-from models.data_ingestion import WikipediaDataIngestion
+from models.data_ingestion import DocumentDataIngestion
 
 router = APIRouter()
 
@@ -16,7 +16,7 @@ def get_chatwithdata_service() -> ChatWithDataService:
     Dependency that provides a singleton instance of ChatWithDataService for chat-with-data.
     """
     if not hasattr(get_chatwithdata_service, "service"):
-        data_ingestion = WikipediaDataIngestion()
+        data_ingestion = DocumentDataIngestion()
         model = ChatWithDataModel(data_ingestion)
         get_chatwithdata_service.service = ChatWithDataService(model)
     return get_chatwithdata_service.service

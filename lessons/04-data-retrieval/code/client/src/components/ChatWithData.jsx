@@ -1,4 +1,3 @@
-// client/src/components/ChatWithData.jsx
 import React, { useState } from 'react';
 import { sendChatWithDataMessage } from '../services/api';
 import { Scatter } from 'react-chartjs-2';
@@ -10,7 +9,7 @@ import {
   Tooltip,
   Legend,
 } from 'chart.js';
-import './ChatWithData.css'
+import './ChatWithData.css';
 
 // Register necessary Chart.js components
 Chart.register(ScatterController, LinearScale, PointElement, Tooltip, Legend);
